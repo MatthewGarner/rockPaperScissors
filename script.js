@@ -1,5 +1,13 @@
 //https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors
 
+//global variables to manage score count
+let computerScore = 0;
+let playerScore = 0;
+let currentRound = 1;
+
+//define area for results to be added
+const resultsLog = document.querySelector('#results-log');
+
 //get random number to randomise computer play
 function generateRandomNo () {
     let outputNumber = Math.floor(Math.random() * 3);
@@ -73,14 +81,20 @@ function playRound (playerSelection, computerSelection) {
     console.log("Player selected: " + playerSelection + " & computer selected: " + computerSelection);
 
     const result = checkResult(playerSelection, computerSelection);
-    console.log(result);
+    
+    
+    const roundResult = document.createElement('li');
+    roundResult.textContent = result;
+
+    resultsLog.appendChild(roundResult);
+
     return result;
 }
 
 //play a game of n rounds
 function game() {
     //let rounds = 5;
-    let currentRound = 1;
+    currentRound = 1;
 
     while (currentRound <= rounds) {
         playRound();
@@ -95,6 +109,8 @@ const playerInput = document.getElementsByName("choice");
 playerInput.forEach(selection => {
     selection.addEventListener('click', playRound)
 })
+
+
 
 
 //game();
