@@ -37,7 +37,7 @@ function computerPlay() {
 }
 
 //compare the player and computer moves - return an outcome
-function checkResult(playerSelection, computerSelection) {
+function getResult(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return resultDraw();
     }
@@ -80,14 +80,15 @@ function playRound (playerSelection, computerSelection) {
     computerSelection = computerPlay();
     console.log("Player selected: " + playerSelection + " & computer selected: " + computerSelection);
 
-    const result = checkResult(playerSelection, computerSelection);
+    const result = getResult(playerSelection, computerSelection);
     
     
     const roundResult = document.createElement('li');
     roundResult.textContent = result;
 
     resultsLog.appendChild(roundResult);
-
+    
+    currentRound++;
     return result;
 }
 

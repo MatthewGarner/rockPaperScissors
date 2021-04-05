@@ -41,7 +41,7 @@ let userInput;
 
 
 
-function checkResult(playerSelection, computerSelection) {
+function getResult(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return resultDraw();
     }
@@ -79,7 +79,7 @@ function playRound () {
     const computerSelection = computerPlay();
     console.log("Player selected: " + playerSelection + " & computer selected: " + computerSelection);
 
-    const result = checkResult(playerSelection, computerSelection);
+    const result = getResult(playerSelection, computerSelection);
     console.log(result);
     return result;
 }
