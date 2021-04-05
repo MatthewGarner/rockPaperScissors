@@ -134,9 +134,29 @@ function startGame(rounds) {
     });
 }
 
+function endGameMessage(gameResult) {
+    if(gameResult === 'player-win') {
+        alert(`You win! Your mighty ${playerScore} points trounces the computer's measly ${computerScore}`);
+    } else if (gameResult === 'computer-win') {
+        alert(`The computers have taken over! Your score of ${playerScore} points couldn't match the computer's ${computerScore}`);
+    } else {
+        alert(`It's a draw - ${playerScore} points apiece`);
+    }
+}
+
 function endGame() {
-    const gameResult = 'Someone won'
-    alert(gameResult) //TODO trigger message based on who won
+    let gameResult;
+
+    if(playerScore > computerScore) {
+        gameResult = 'player-win';
+    } else if (computerScore > playerScore) {
+        gameResult = 'computer-win';
+    } else if (computerScore === playerScore) {
+        gameResult = 'draw';
+    }
+    else 'ERROR'
+
+    endGameMessage(gameResult);
 
     playerInput.forEach(selection => {
         selection.removeEventListener('click', playRound);
