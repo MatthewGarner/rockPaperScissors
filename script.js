@@ -20,6 +20,12 @@ const playerScoreBoard = document.querySelector('#player-score .score-number');
 const computerScoreBoard = document.querySelector('#computer-score .score-number');
 const roundCounter = document.querySelector('#round-number');
 
+//select divs to toggle
+const scoreDiv = document.getElementById('score-board');
+const startGameDiv = document.getElementById('round-select');
+scoreDiv.classList.add('hidden');
+
+
 //get random number to randomise computer play
 function generateRandomNo () {
     let outputNumber = Math.floor(Math.random() * 3);
@@ -72,19 +78,19 @@ function getResult(playerSelection, computerSelection) {
 
 //action when round result is a draw
 function resultDraw() {
-    return "Oooooh it's a tie!";
+    return "Round Drawn";
 }
 
 //action when round result is a player win
 function resultPlayerWin() {
     playerScore++;
-    return "Incredible - you won this round!";
+    return "Player wins";
 }
 
 //action when round result is a player loss
 function resultPlayerLoss() {
     computerScore++;
-    return "Beaten by the robot this time!";
+    return "Computer wins";
 }
 
 function updateScoreBoard() {
@@ -128,6 +134,9 @@ function startGame(rounds) {
     computerScore = 0;
     updateScoreBoard();
 
+    startGameDiv.classList.add('hidden');
+    scoreDiv.classList.remove('hidden');
+
     //add event listener to play a round when button is clicked on any button
     playerInput.forEach(selection => {
         selection.addEventListener('click', playRound);
@@ -157,6 +166,8 @@ function endGame() {
     else 'ERROR'
 
     endGameMessage(gameResult);
+
+    startGameDiv.classList.remove('hidden');
 
     playerInput.forEach(selection => {
         selection.removeEventListener('click', playRound);
