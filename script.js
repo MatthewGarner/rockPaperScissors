@@ -4,6 +4,13 @@
 let computerScore = 0;
 let playerScore = 0;
 let currentRound = 1;
+let roundLimit;
+
+// get all the choices for the game
+const playerInput = document.getElementsByName("choice");
+const roundInput = document.querySelector("#rounds");
+const playGame = document.getElementById("play-game");
+const gameForm = document.getElementById("start-game-form");
 
 //define area for results to be added
 const resultsLog = document.querySelector('#results-log');
@@ -88,7 +95,6 @@ function updateScoreBoard() {
 
 //play a round, get the result and increment the round counter
 function playRound (playerSelection, computerSelection) {
-    
     playerSelection = playerSelection.target.id;
     computerSelection = computerPlay();
     console.log("Player selected: " + playerSelection + " & computer selected: " + computerSelection);
@@ -99,32 +105,47 @@ function playRound (playerSelection, computerSelection) {
     roundResult.textContent = result;
 
     resultsLog.appendChild(roundResult);
-    
-    currentRound++;
     updateScoreBoard();
+    currentRound++;
+
+    if(currentRound > roundLimit) {
+        endGame();
+        return result;
+    }
+    
+    updateScoreBoard();
+    
     return result;
 }
 
 //play a game of n rounds
-function game() {
-    let rounds = 5;
-    currentRound = 1;
+function startGame(rounds) {
+    roundLimit = rounds;
 
-    while (currentRound <= rounds) {
-        playRound();
-        currentRound++;
-    }
+    //reset all the scores
+    currentRound = 1;
+    playerScore = 0;
+    computerScore = 0;
+    updateScoreBoard();
+
+    //add event listener to play a round when button is clicked on any button
+    playerInput.forEach(selection => {
+        selection.addEventListener('click', playRound)    
+    });
 }
 
-// get all the choices for the game
-const playerInput = document.getElementsByName("choice");
+function endGame() {
+    const gameResult = 'Someone won'
+    alert(gameResult) //TODO trigger message based on who won
 
-//add event listener to play a round when button is clicked on any button
-playerInput.forEach(selection => {
-    selection.addEventListener('click', playRound)
+}
+
+gameForm.addEventListener('submit', e => {
+    e.preventDefault();
+    let roundsToPlay = e.target.elements.rounds.value;
+
+    startGame(roundsToPlay);
 })
-
-
 
 
 //game();
