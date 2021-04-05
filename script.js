@@ -130,13 +130,17 @@ function startGame(rounds) {
 
     //add event listener to play a round when button is clicked on any button
     playerInput.forEach(selection => {
-        selection.addEventListener('click', playRound)    
+        selection.addEventListener('click', playRound);
     });
 }
 
 function endGame() {
     const gameResult = 'Someone won'
     alert(gameResult) //TODO trigger message based on who won
+
+    playerInput.forEach(selection => {
+        selection.removeEventListener('click', playRound);
+    });
 
 }
 
