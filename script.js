@@ -8,6 +8,11 @@ let currentRound = 1;
 //define area for results to be added
 const resultsLog = document.querySelector('#results-log');
 
+//target score areas & round counter
+const playerScoreBoard = document.querySelector('#player-score .score-number');
+const computerScoreBoard = document.querySelector('#computer-score .score-number');
+const roundCounter = document.querySelector('#round-number');
+
 //get random number to randomise computer play
 function generateRandomNo () {
     let outputNumber = Math.floor(Math.random() * 3);
@@ -59,21 +64,29 @@ function getResult(playerSelection, computerSelection) {
 }
 
 //action when round result is a draw
-function resultDraw () {
+function resultDraw() {
     return "Oooooh it's a tie!";
 }
 
 //action when round result is a player win
-function resultPlayerWin () {
+function resultPlayerWin() {
+    playerScore++;
     return "Incredible - you won this round!";
 }
 
 //action when round result is a player loss
-function resultPlayerLoss () {
+function resultPlayerLoss() {
+    computerScore++;
     return "Beaten by the robot this time!";
 }
 
-//play a round
+function updateScoreBoard() {
+    playerScoreBoard.textContent = playerScore;
+    computerScoreBoard.textContent = computerScore;
+    roundCounter.textContent = currentRound;
+}
+
+//play a round, get the result and increment the round counter
 function playRound (playerSelection, computerSelection) {
     
     playerSelection = playerSelection.target.id;
@@ -82,19 +95,19 @@ function playRound (playerSelection, computerSelection) {
 
     const result = getResult(playerSelection, computerSelection);
     
-    
     const roundResult = document.createElement('li');
     roundResult.textContent = result;
 
     resultsLog.appendChild(roundResult);
     
     currentRound++;
+    updateScoreBoard();
     return result;
 }
 
 //play a game of n rounds
 function game() {
-    //let rounds = 5;
+    let rounds = 5;
     currentRound = 1;
 
     while (currentRound <= rounds) {
