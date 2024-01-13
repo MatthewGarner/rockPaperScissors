@@ -1,49 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>A simple rock paper scissors game</title>
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" href="style.css">
-  <base href=""> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors game</title>
+  <script src="./script.js"></script>
 </head>
 <body>
-  <div id = "game-area">
-    <h1>Let's play Rock Paper Scissors</h1>
-    <div id="round-select">
-      <form id ="start-game-form">
-        <label for="rounds">Select how many rounds to play</label>
-        <input type="number" id="rounds" name="rounds" min="1" max="10" required>
-        <button id="play-game" type="submit">Start Game</button>
-      </form>
-    </div>
-    <div id="score-board">
-      <div id ="round-count-area" class="number-display">
-        <h2>Current Round</h2>
-        <h3 id="round-number">1</h3>
-      </div>
-      <div id="player-score" class="number-display">
-        <h2>Player score</h2>
-        <h3 class="score-number">0</h3>
-      </div>
-      <div id="computer-score" class="number-display">
-        <h2>Computer score</h2>
-        <h3 class="score-number">0</h3>
-      </div>
-    </div>
-    <div id="player-selections">
-      <form id="player-select">
-        <button id="rock" class="input-button" name="choice" type="button">Rock</button>
-        <button id="paper" class="input-button" name="choice" type="button">Paper</button>
-        <button id="scissors" class="input-button" name="choice" type="button">Scissors</button>
-      </form>
-   </div>
-    <div id="results">
-      <h2>Results Log</h2>
-      <ol id="results-log"></ol>
-    </div>
-  </div>  
+  
 </body>
-
-  <script type = "text/javascript" src= "script.js"></script>
-
 </html>
