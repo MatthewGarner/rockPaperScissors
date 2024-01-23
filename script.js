@@ -1,3 +1,12 @@
+let buttons = document.querySelector('.button-container');
+
+buttons.addEventListener('click', (event) => {
+    //which button is clicked
+    let choice = event.target.name;
+
+    playRound(choice, getComputerChoice());
+});
+
 // Get computer's random move
 function getComputerChoice() {
     const randomChoice = Math.floor(Math.random() * 3);
@@ -103,7 +112,7 @@ function game() {
     let playerScore = 0;
     let computerScore = 0;
     let round;
-    let roundLimit = 5;
+    const roundLimit = 5;
 
     for (round = 1; round <= roundLimit; round ++) {
         const roundResult = playRound(getPlayerChoice(), getComputerChoice());
