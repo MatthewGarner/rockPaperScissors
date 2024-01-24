@@ -1,8 +1,5 @@
 // TODOs:
-// - Fix playround prompting for text input when round is a tie 
-// - Display running score
-// - Announce winner when score reaches round limit
-//refactor - remove game function
+//Fix not showing when player has 5 points
 
 
 //Game state
