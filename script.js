@@ -9,9 +9,9 @@
 let playerScore = 0;
 let computerScore = 0;
 const scoreLimit = 5;
+
+//Showing game state
 const gameArea = document.querySelector('.results-area');
-
-
 const buttons = document.querySelector('.button-container');
 
 buttons.addEventListener('click', (event) => {
@@ -21,11 +21,8 @@ playRound(choice, getComputerChoice());
 });
 
 
-function announceWinner () {
-    if (playerScore > computerScore) {
-        alert ('You win!!!');
-    }
-    else alert ('You lose, computer wins again!');
+function announceWinner (winner) {
+    alert(`${winner} wins!`);
     return;
 }
 
@@ -142,7 +139,12 @@ function playRound (playerSelection, computerSelection) {
 
         updateScore(roundResult);
 
-        if (playerScore >= scoreLimit || computerScore >= scoreLimit) {
+        if (playerScore >= scoreLimit) {
+            announceWinner('Player');
+            return resetGame();
+        } 
+        else if (computerScore >= scoreLimit) {
+            announceWinner('Computer');
             return resetGame();
         }
 
