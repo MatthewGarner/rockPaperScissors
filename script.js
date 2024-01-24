@@ -21,6 +21,14 @@ playRound(choice, getComputerChoice());
 });
 
 
+function announceWinner () {
+    if (playerScore > computerScore) {
+        alert ('You win!!!');
+    }
+    else alert ('You lose, computer wins again!');
+    return;
+}
+
 function resetGame() {
     playerScore = 0;
     computerScore = 0;
@@ -137,31 +145,7 @@ function playRound (playerSelection, computerSelection) {
         if (playerScore >= scoreLimit || computerScore >= scoreLimit) {
             return resetGame();
         }
-        
+
         return;
     
-}
-
-function game() {
-   
-
-    while (computerScore < scoreLimit && playerScore < scoreLimit) {
-
-        const buttons = document.querySelector('.button-container');
-        buttons.addEventListener('click', (event) => {
-        //which button is clicked
-        let choice = event.target.name;
-        playRound(choice, getComputerChoice());
-        
-        });
-
-       // const roundResult = playRound(getPlayerChoice(), getComputerChoice());
-
-        
-
-        
-    }
-    
-    return 'Game over'; 
-
 }
