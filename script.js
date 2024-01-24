@@ -1,13 +1,39 @@
-let buttons = document.querySelector('.button-container');
+// TODOs:
+// - Fix playround prompting for text input when round is a tie 
+// - Display running score
+// - Announce winner when score reaches round limit
+//refactor - remove game function
+
+
+//Game state
+let playerScore = 0;
+let computerScore = 0;
+const scoreLimit = 5;
+const gameArea = document.querySelector('.results-area');
+
+
+const buttons = document.querySelector('.button-container');
 
 buttons.addEventListener('click', (event) => {
-    //which button is clicked
-    let choice = event.target.name;
-
-    playRound(choice, getComputerChoice());
+//which button is clicked
+let choice = event.target.name;
+playRound(choice, getComputerChoice());
 });
 
-// Get computer's random move
+
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    gameArea.textContent = '';
+}
+
+function updateScore (roundResult) {
+    gameArea.textContent =`Round result: ${roundResult}, current score is:
+        Player: ${playerScore}
+        Computer: ${computerScore}`;
+}
+
+// Randomly select a move for computer
 function getComputerChoice() {
     const randomChoice = Math.floor(Math.random() * 3);
 
@@ -97,25 +123,7 @@ function playRound (playerSelection, computerSelection) {
                 break;
         }
     }
-
-    console.log(`player chose ${playerSelection}, computer chose ${computerSelection}`)
-    //if it's a tie, replay the round
-    if (roundResult === 'tie') {
-        return playRound(getPlayerChoice(), getComputerChoice());
-    }
-    else {
-        return roundResult;
-    }
-}
-
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let round;
-    const roundLimit = 5;
-
-    for (round = 1; round <= roundLimit; round ++) {
-        const roundResult = playRound(getPlayerChoice(), getComputerChoice());
+        console.log (`player chose ${playerSelection}, computer chose ${computerSelection}`)
 
         if (roundResult === 'win') {
             playerScore++;
@@ -124,9 +132,34 @@ function game() {
             computerScore ++;
         }
 
-        console.log(`Round result: ${roundResult}, current score is:
-        Player: ${playerScore}
-        Computer: ${computerScore}`);
+        updateScore(roundResult);
+
+        if (playerScore >= scoreLimit || computerScore >= scoreLimit) {
+            return resetGame();
+        }
+        
+        return;
+    
+}
+
+function game() {
+   
+
+    while (computerScore < scoreLimit && playerScore < scoreLimit) {
+
+        const buttons = document.querySelector('.button-container');
+        buttons.addEventListener('click', (event) => {
+        //which button is clicked
+        let choice = event.target.name;
+        playRound(choice, getComputerChoice());
+        
+        });
+
+       // const roundResult = playRound(getPlayerChoice(), getComputerChoice());
+
+        
+
+        
     }
     
     return 'Game over'; 
